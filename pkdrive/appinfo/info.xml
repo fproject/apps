@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<info>
+    <id>pkdrive</id>
+    <name>Pk Drive</name>
+    <description>My first ownCloud app</description>
+    <licence>AGPL</licence>
+    <author>Phan Van Thanh</author>
+    <version>0.0.1</version>
+    <namespace>PkDrive</namespace>
+    <category>other</category>
+    <dependencies>
+        <owncloud min-version="8.1" />
+    </dependencies>
+</info>
