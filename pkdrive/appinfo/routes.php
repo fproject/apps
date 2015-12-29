@@ -18,8 +18,26 @@
  * it's instantiated in there
  */
 
+$this->create('files_ajax_delete', 'ajax/delete.php')
+	->actionInclude('pkdrive/ajax/delete.php');
+$this->create('files_ajax_download', 'ajax/download.php')
+	->actionInclude('pkdrive/ajax/download.php');
+$this->create('files_ajax_getstoragestats', 'ajax/getstoragestats.php')
+	->actionInclude('pkdrive/ajax/getstoragestats.php');
 $this->create('files_ajax_list', 'ajax/list.php')
-	->actionInclude('files/ajax/list.php');
+	->actionInclude('pkdrive/ajax/list.php');
+$this->create('files_ajax_move', 'ajax/move.php')
+	->actionInclude('pkdrive/ajax/move.php');
+$this->create('files_ajax_rename', 'ajax/rename.php')
+	->actionInclude('pkdrive/ajax/rename.php');
+$this->create('files_ajax_scan', 'ajax/scan.php')
+	->actionInclude('pkdrive/ajax/scan.php');
+$this->create('files_ajax_upload', 'ajax/upload.php')
+	->actionInclude('pkdrive/ajax/upload.php');
+
+$this->create('download', 'download{file}')
+	->requirements(array('file' => '.*'))
+	->actionInclude('pkdrive/download.php');
 
 return [
     'routes' => [

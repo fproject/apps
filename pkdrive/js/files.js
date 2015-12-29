@@ -25,7 +25,7 @@
 				state.call.abort();
 			}
 			state.dir = currentDir;
-			state.call = $.getJSON(OC.filePath('files','ajax','getstoragestats.php') + '?dir=' + encodeURIComponent(currentDir),function(response) {
+			state.call = $.getJSON(OC.filePath('pkdrive','ajax','getstoragestats.php') + '?dir=' + encodeURIComponent(currentDir),function(response) {
 				state.dir = null;
 				state.call = null;
 				Files.updateMaxUploadFilesize(response);
@@ -160,7 +160,7 @@
 			if (params) {
 				q = '?' + OC.buildQueryString(params);
 			}
-			return OC.filePath('files', 'ajax', action + '.php') + q;
+			return OC.filePath('pkdrive', 'ajax', action + '.php') + q;
 		},
 
 		/**
@@ -322,9 +322,9 @@ function scanFiles(force, dir, users) {
 		} else {
 			usersString = JSON.stringify(users);
 		}
-		scannerEventSource = new OC.EventSource(OC.filePath('files','ajax','scan.php'),{force: force,dir: dir, users: usersString});
+		scannerEventSource = new OC.EventSource(OC.filePath('pkdrive','ajax','scan.php'),{force: force,dir: dir, users: usersString});
 	} else {
-		scannerEventSource = new OC.EventSource(OC.filePath('files','ajax','scan.php'),{force: force,dir: dir});
+		scannerEventSource = new OC.EventSource(OC.filePath('pkdrive','ajax','scan.php'),{force: force,dir: dir});
 	}
 	scanFiles.cancel = scannerEventSource.close.bind(scannerEventSource);
 	scannerEventSource.listen('count',function(count) {
