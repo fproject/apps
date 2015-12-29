@@ -67,8 +67,8 @@ try {
 		$files = \OCA\Files\Helper::sortFiles($files, $sortAttribute, $sortDirection);
 	} else {
 		// create file list without mimetype filter
-//		$files = \OCA\PkDrive\Helper::getFiles($dir, $sortAttribute, $sortDirection);
-		$files = \OCA\Files\Helper::getFiles($dir, $sortAttribute, $sortDirection);
+		$files = \OCA\PkDrive\Helper::getFiles($dir, $sortAttribute, $sortDirection);
+//		$files = \OCA\Files\Helper::getFiles($dir, $sortAttribute, $sortDirection);
 	}
 
 	$files = \OCA\Files\Helper::populateTags($files);
