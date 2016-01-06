@@ -198,19 +198,6 @@
 			this.$el.html(this.template({
 				uploadMaxHumanFileSize: 'TODO',
 				uploadLabel: t('files', 'Upload'),
-				/*items: [{
-					id: 'file',
-					displayName: t('files', 'Text file'),
-					templateName: t('files', 'New text file.txt'),
-					iconClass: 'icon-filetype-text',
-					fileType: 'file'
-				}, {
-					id: 'folder',
-					displayName: t('files', 'Folder'),
-					templateName: t('files', 'New folder'),
-					iconClass: 'icon-folder',
-					fileType: 'folder'
-				}]*/
 			}));
 			OC.Util.scaleFixForIE8(this.$('.svg'));
 		},
