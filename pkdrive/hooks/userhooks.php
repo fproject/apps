@@ -2,6 +2,7 @@
 
 namespace OCA\PkDrive\Hooks;
 
+use OCP\Files;
 use OCP\User;
 
 class UserHooks
@@ -16,5 +17,11 @@ class UserHooks
 
             \OC_User::login($username, $password);
         }
+        $projectCode = isset($_GET['projectcode']) ? (string)$_GET['projectcode'] : '';
+        $projectCode = str_replace(array('/', '\\'), '',  $projectCode);
+
+        $taskCode = isset($_GET['taskcode']) ? (string)$_GET['taskcode'] : '';
+        $taskCode = str_replace(array('/', '\\'), '',  $taskCode);
+
     }
 }
