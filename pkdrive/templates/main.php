@@ -8,6 +8,7 @@ script('pkdrive', 'navigation');
 script('pkdrive', 'jquery.fileupload');
 script('pkdrive', 'jquery.iframe-transport');
 script('pkdrive', 'jquery-visibility');
+script('pkdrive', 'search');
 script('pkdrive', 'newfilemenu');
 style('pkdrive', 'style');
 style('files', 'files');
