@@ -30,6 +30,24 @@ $l = \OC::$server->getL10N('files');
 $dir = isset($_GET['dir']) ? (string)$_GET['dir'] : '';
 $dir = \OC\Files\Filesystem::normalizePath($dir);
 
+if(isset($_SESSION['pkPath'])) {
+	$dir = $_SESSION['pkPath'];
+	if (!\OC\Files\Filesystem::file_exists($dir)) {
+		try {
+			\OC\Files\Filesystem::mkdir($dir);
+		} catch (\Exception $e) {
+			$result = [
+				'success' => false,
+				'data' => [
+					'message' => $e->getMessage()
+				]
+			];
+			\OCP\JSON::error($result);
+			exit();
+		}
+	}
+}
+
 try {
 	$dirInfo = \OC\Files\Filesystem::getFileInfo($dir);
 	if (!$dirInfo || !$dirInfo->getType() === 'dir') {
@@ -51,10 +69,10 @@ try {
 	if (is_array($mimetypeFilters) && count($mimetypeFilters)) {
 		$mimetypeFilters = array_unique($mimetypeFilters);
 
-//		if (!in_array('httpd/unix-directory', $mimetypeFilters)) {
-//			// append folder filter to be able to browse folders
-//			$mimetypeFilters[] = 'httpd/unix-directory';
-//		}
+		if (!in_array('httpd/unix-directory', $mimetypeFilters)) {
+			// append folder filter to be able to browse folders
+			$mimetypeFilters[] = 'httpd/unix-directory';
+		}
 
 		// create filelist with mimetype filter - as getFiles only supports on
 		// mimetype filter at once we will filter this folder for each
