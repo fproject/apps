@@ -30,24 +30,6 @@ $l = \OC::$server->getL10N('files');
 $dir = isset($_GET['dir']) ? (string)$_GET['dir'] : '';
 $dir = \OC\Files\Filesystem::normalizePath($dir);
 
-if(isset($_SESSION['pkPath'])) {
-	$dir = $_SESSION['pkPath'];
-	if (!\OC\Files\Filesystem::file_exists($dir)) {
-		try {
-			\OC\Files\Filesystem::mkdir($dir);
-		} catch (\Exception $e) {
-			$result = [
-				'success' => false,
-				'data' => [
-					'message' => $e->getMessage()
-				]
-			];
-			\OCP\JSON::error($result);
-			exit();
-		}
-	}
-}
-
 try {
 	$dirInfo = \OC\Files\Filesystem::getFileInfo($dir);
 	if (!$dirInfo || !$dirInfo->getType() === 'dir') {
