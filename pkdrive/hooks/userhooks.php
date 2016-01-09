@@ -17,22 +17,5 @@ class UserHooks
 
             \OC_User::login($username, $password);
         }
-
-        define('DIRECTORY_SEPARATOR', '/');
-        define('PROJECT_PREFIX', 'project-');
-        define('TASK_PREFIX', 'task-');
-        define('ISSUE_PREFIX', 'issue-');
-
-        $path = "";
-        if(isset($_GET['projectCode'])) {
-            $path .= PROJECT_PREFIX . (string)$_GET['projectCode'] . DIRECTORY_SEPARATOR;
-            if(isset($_GET['taskCode'])) {
-                $path .= TASK_PREFIX . (string)$_GET['taskCode'] . DIRECTORY_SEPARATOR;
-            } elseif (isset($_GET['issueCode'])) {
-                $path .= ISSUE_PREFIX . (string)$_GET['issueCode'] . DIRECTORY_SEPARATOR;
-            }
-            $path = \OC\Files\Filesystem::normalizePath($path);
-            $_SESSION["pkPath"] = $path;
-        }
     }
 }
