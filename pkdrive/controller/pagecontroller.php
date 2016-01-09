@@ -11,6 +11,8 @@
 
 namespace OCA\PkDrive\Controller;
 
+use OC\Files\Filesystem;
+use OCA\PkDrive\Component\TargetType;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
@@ -19,12 +21,54 @@ use OCP\Util;
 
 class PageController extends Controller {
 
+	const PROJECT_PREFIX = 'project-';
+	const TASK_PREFIX = 'task-';
+	const ISSUE_PREFIX = 'issue-';
 
 	private $userId;
 
 	public function __construct($AppName, IRequest $request, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
+		$path = "";
+		if(isset($_GET['containerId'])) {
+			$path .= self::PROJECT_PREFIX . (string)$_GET['containerId'] . DIRECTORY_SEPARATOR;
+			if(isset($_GET['targetType']) && isset($_GET['targetId'])) {
+				switch($_GET['targetType']) {
+					case TargetType::TASK:
+						$path .= self::TASK_PREFIX;
+						break;
+					case TargetType::ISSUE:
+						$path .= self::ISSUE_PREFIX;
+						break;
+					default:
+						break;
+				}
+				$path .= (string)$_GET['targetId'] . DIRECTORY_SEPARATOR;
+			}
+			$path = Filesystem::normalizePath($path);
+			//Create folder for path
+			if (!Filesystem::file_exists($path)) {
+				try {
+					Filesystem::mkdir($path);
+				} catch (\Exception $e) {
+					$result = [
+						'success' => false,
+						'data' => [
+							'message' => $e->getMessage()
+						]
+					];
+					\OCP\JSON::error($result);
+					exit();
+				}
+			}
+			if(!isset($_GET['dir'])) {
+				$params = array_merge($_GET, ["dir" => $path]);
+				$url = $_SERVER['PHP_SELF'] . '?' . http_build_query($params);
+				header('Location: ' . $url, true, 302);
+				exit();
+			}
+		}
 	}
 
 	/**
