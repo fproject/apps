@@ -10,6 +10,7 @@ script('pkdrive', 'jquery.iframe-transport');
 script('pkdrive', 'jquery-visibility');
 script('pkdrive', 'search');
 script('pkdrive', 'newfilemenu');
+script('pkdrive', 'pkdrive');
 style('pkdrive', 'style');
 style('files', 'files');
 style('files', 'upload');
