@@ -45,7 +45,9 @@ class PageController extends Controller {
 						break;
 				}
 				$path .= (string)$_GET['targetId'] . DIRECTORY_SEPARATOR;
-			}
+			} elseif (!isset($_GET['targetType']) && !isset($_GET['targetId']))
+				$_SESSION['targetType'] = TargetType::PROJECT; //use session to save targetType
+
 			$path = Filesystem::normalizePath($path);
 			//Create folder for path
 			if (!Filesystem::file_exists($path)) {
