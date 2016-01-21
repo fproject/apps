@@ -64,16 +64,16 @@ try {
 		}
 
 		// sort the files accordingly
-		$files = \OCA\Files\Helper::sortFiles($files, $sortAttribute, $sortDirection);
+		$files = \OCA\PkDrive\Helper::sortFiles($files, $sortAttribute, $sortDirection);
 	} else {
 		// create file list without mimetype filter
 		$files = \OCA\PkDrive\Helper::getFiles($dir, $sortAttribute, $sortDirection);
 //		$files = \OCA\Files\Helper::getFiles($dir, $sortAttribute, $sortDirection);
 	}
 
-	$files = \OCA\Files\Helper::populateTags($files);
+	$files = \OCA\PkDrive\Helper::populateTags($files);
 	$data['directory'] = $dir;
-	$data['files'] = \OCA\Files\Helper::formatFileInfos($files);
+	$data['files'] = \OCA\PkDrive\Helper::formatFileInfos($files);
 	$data['permissions'] = $permissions;
 
 	OCP\JSON::success(array('data' => $data));
