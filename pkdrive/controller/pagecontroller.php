@@ -13,6 +13,7 @@ namespace OCA\PkDrive\Controller;
 
 use OC\Files\Filesystem;
 use OCA\PkDrive\Component\TargetType;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
@@ -89,7 +90,16 @@ class PageController extends Controller {
 			'user' => $this->userId,
 			'uploadLimit' => $uploadLimit
 		];
-		return new TemplateResponse('pkdrive', 'main', $params);  // templates/main.php
+
+		/** @var ContentSecurityPolicy $csp */
+		$csp = new ContentSecurityPolicy();
+		$csp->addAllowedConnectDomain('*');
+
+		/** @var TemplateResponse $response */
+		$response = new TemplateResponse('pkdrive', 'main', $params);  // templates/main.php
+		$response->setContentSecurityPolicy($csp);
+
+		return $response;
 	}
 
 	/**
