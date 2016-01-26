@@ -1002,7 +1002,14 @@
 			var nameSpan=$('<span></span>').addClass('nametext');
 			var innernameSpan = $('<span></span>').addClass('innernametext').text(basename);
 			nameSpan.append(innernameSpan);
+
+			//Target info
+			var targetSpan = $('<span></span>').addClass('targetText');
+			this.targetInfo();
+			//nameSpan.append(targetSpan);
+
 			linkElem.append(nameSpan);
+			linkElem.append(targetSpan);
 			if (extension) {
 				nameSpan.append($('<span></span>').addClass('extension').text(extension));
 			}
@@ -1409,6 +1416,40 @@
 
 			this.setFiles(result.data.files);
 			return true;
+		},
+
+		/**
+		 * Get target info for the file list using ajax call
+		 *
+		 * @return ajax call object
+		 */
+		targetInfo: function() {
+			if (this._targetInfoCall) {
+				this._targetInfoCall.abort();
+			}
+			this._targetInfoCall = $.ajax({
+				url: this.getTargetUrl(),
+				type: "GET",
+				crossDomain: true,
+				dataType: 'json'
+			});
+			var callBack = this.targetInfoCallback.bind(this);
+			return this._targetInfoCall.then(callBack, callBack);
+		},
+
+		targetInfoCallback: function(result) {
+			delete this._targetInfoCall;
+			var data = result.data;
+			return true;
+		},
+
+		/**
+		 * Get target info for the file list using ajax call
+		 *
+		 * @return string url
+		 */
+		getTargetUrl: function() {
+			return "http://rest.projectkit.net/tasks/1";
 		},
 
 		updateStorageStatistics: function(force) {
