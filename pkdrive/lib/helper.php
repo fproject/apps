@@ -4,6 +4,7 @@ namespace OCA\PkDrive;
 
 use OC\Files\FileInfo;
 use OCA\PkDrive\Component\TargetType;
+use OCA\PkDrive\Controller\PageController;
 
 class Helper extends \OCA\Files\Helper
 {
@@ -63,7 +64,8 @@ class Helper extends \OCA\Files\Helper
         preg_match('/(?<target>issue-(?<targetId>\d+))/', $i->getPath(), $issue);
 
         if(!is_null($container)) {
-            $entry['path'] .= $container[0] . DIRECTORY_SEPARATOR;
+            $entry['path'] .= PageController::PROJECTKIT_PREFIX . DIRECTORY_SEPARATOR .
+                $container[0] . DIRECTORY_SEPARATOR;
             if(!empty($task)) {
                 $entry['path'] .= $task['target'];
                 $entry['targetType'] = TargetType::TASK;
