@@ -22,6 +22,7 @@ use OCP\Util;
 
 class PageController extends Controller {
 
+	const PROJECTKIT_PREFIX = 'projectkit';
 	const PROJECT_PREFIX = 'project-';
 	const TASK_PREFIX = 'task-';
 	const ISSUE_PREFIX = 'issue-';
@@ -31,7 +32,7 @@ class PageController extends Controller {
 	public function __construct($AppName, IRequest $request, $UserId){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
-		$path = "";
+		$path = self::PROJECTKIT_PREFIX . DIRECTORY_SEPARATOR;
 		if(isset($_GET['containerId'])) {
 			$path .= self::PROJECT_PREFIX . (string)$_GET['containerId'] . DIRECTORY_SEPARATOR;
 			if(isset($_GET['targetType']) && isset($_GET['targetId'])) {
