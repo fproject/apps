@@ -11,7 +11,7 @@ script('pkdrive', 'navigation');
 script('pkdrive', 'jquery.fileupload');
 script('pkdrive', 'jquery.iframe-transport');
 script('pkdrive', 'jquery-visibility');
-script('pkdrive', 'search');
+//script('pkdrive', 'search');
 script('pkdrive', 'newfilemenu');
 script('pkdrive', 'pkdrive');
 style('pkdrive', 'style');
