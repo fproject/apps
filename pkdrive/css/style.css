@@ -5,3 +5,13 @@
 .actions.creatable {
 	margin-left: 60px;
 }
+
+span.targetText {
+	position: absolute;
+	right: 55px;
+	padding: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+	height: 100%;
+}
