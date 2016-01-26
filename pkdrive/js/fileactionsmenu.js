@@ -88,6 +88,9 @@
 				fileActions.getCurrentPermissions()
 			);
 
+			if(actions.hasOwnProperty("Rename"))
+				delete actions.Rename;
+
 			var defaultAction = fileActions.getDefaultFileAction(
 				fileActions.getCurrentMimeType(),
 				fileActions.getCurrentType(),
