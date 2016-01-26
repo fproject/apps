@@ -34,9 +34,6 @@ span.targetText {
 .newFileMenu.bubble:after {
 	left: -5px !important;
 	top: 6px !important;
-}
-
-.bubble:after, #app-navigation .app-navigation-entry-menu:after {
 	border-bottom-color: transparent !important;
 	border-right-color: #fff;
 	border-width: 8px;
