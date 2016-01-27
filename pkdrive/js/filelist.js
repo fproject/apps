@@ -12,6 +12,18 @@
 
 	var TEMPLATE_ADDBUTTON = '<a href="#" class="button new"><img src="{{iconUrl}}" alt="{{addText}}"></img></a>';
 
+	var TARGET_TYPE = {
+		'project': 0,
+		'task': 1,
+		'issue': 2,
+		'resource': 3,
+		'calendarItem': 4,
+		'user': 5,
+		'post': 6,
+		'taskResourceAssignment': 7,
+		'unknown': -1
+	};
+
 	/**
 	 * @class OCA.Files.FileList
 	 * @classdesc
@@ -1005,8 +1017,6 @@
 
 			//Target info
 			var targetSpan = $('<span></span>').addClass('targetText');
-			this.targetInfo();
-			//nameSpan.append(targetSpan);
 
 			linkElem.append(nameSpan);
 			linkElem.append(targetSpan);
@@ -1221,6 +1231,12 @@
 					iconDiv.css('background-image', 'url("' + previewUrl + '")');
 				}
 			}
+
+			if(fileData.hasOwnProperty('targetType') && fileData.hasOwnProperty('targetId')) {
+				var targetDiv = filenameTd.find('.targetText');
+				this.targetInfo(fileData.targetId, fileData.targetType, targetDiv);
+			}
+
 			return tr;
 		},
 		/**
@@ -1420,36 +1436,43 @@
 
 		/**
 		 * Get target info for the file list using ajax call
-		 *
-		 * @return ajax call object
+		 * @param targetId id of target
+		 * @param targetType type of target, define in TargetType class
+		 * @param targetDiv div tag for a row
 		 */
-		targetInfo: function() {
-			if (this._targetInfoCall) {
-				this._targetInfoCall.abort();
-			}
-			this._targetInfoCall = $.ajax({
-				url: this.getTargetUrl(),
+		targetInfo: function(targetId, targetType, targetDiv) {
+			$.ajax({
+				url: this.getTargetUrl(targetId, targetType),
 				type: "GET",
 				crossDomain: true,
-				dataType: 'json'
+				dataType: 'json',
+				success: function(data) {
+					if(data.hasOwnProperty('name'))
+						targetDiv.text(data.name);
+				}
 			});
-			var callBack = this.targetInfoCallback.bind(this);
-			return this._targetInfoCall.then(callBack, callBack);
-		},
-
-		targetInfoCallback: function(result) {
-			delete this._targetInfoCall;
-			var data = result.data;
-			return true;
 		},
 
 		/**
-		 * Get target info for the file list using ajax call
-		 *
+		 * Get link url target info
+		 * @param targetId id of target
+		 * @param targetType type of target, define in TargetType class
 		 * @return string url
 		 */
-		getTargetUrl: function() {
-			return "http://rest.projectkit.net/tasks/1";
+		getTargetUrl: function(targetId, targetType) {
+			var targetInfoUrl = "http://rest.projectkit.net/";
+			switch(targetType) {
+				case TARGET_TYPE.task:
+					targetInfoUrl += "tasks";
+					break;
+				case TARGET_TYPE.issue:
+					targetInfoUrl += "issues";
+					break;
+				default:
+					break;
+			}
+			targetInfoUrl += "/" + targetId;
+			return targetInfoUrl;
 		},
 
 		updateStorageStatistics: function(force) {
