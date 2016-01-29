@@ -64,6 +64,8 @@ class Helper extends \OCA\Files\Helper
         preg_match('/(?<target>issue-(?<targetId>\d+))/', $i->getPath(), $issue);
 
         if(!is_null($container)) {
+            if(isset($_SESSION['targetType']))
+                $entry['container'] = $_SESSION['targetType'];
             $entry['path'] .= PageController::PROJECTKIT_PREFIX . DIRECTORY_SEPARATOR .
                 $container[0] . DIRECTORY_SEPARATOR;
             if(!empty($task)) {
