@@ -47,6 +47,7 @@ class PageController extends Controller {
 						break;
 				}
 				$path .= (string)$_GET['targetId'] . DIRECTORY_SEPARATOR;
+				$_SESSION['targetType'] = $_GET['targetType'];
 			} elseif (!isset($_GET['targetType']) && !isset($_GET['targetId']))
 				$_SESSION['targetType'] = TargetType::PROJECT; //use session to save targetType
 
