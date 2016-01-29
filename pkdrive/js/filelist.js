@@ -1232,7 +1232,8 @@
 				}
 			}
 
-			if(fileData.hasOwnProperty('targetType') && fileData.hasOwnProperty('targetId')) {
+			if(fileData.hasOwnProperty('targetType') && fileData.hasOwnProperty('targetId') &&
+				fileData.hasOwnProperty('container') && fileData.container == 0) {
 				var targetDiv = filenameTd.find('.targetText');
 				this.targetInfo(fileData.targetId, fileData.targetType, targetDiv);
 			}
