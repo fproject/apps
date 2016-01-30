@@ -52,3 +52,12 @@ span.targetText {
 .newFileMenu.popovermenu li {
 	padding: 0;
 }
+
+#filestable.multiselect {
+	top: 44px !important;
+}
+
+table.multiselect thead {
+	position: relative !important;
+	top: inherit !important;
+}
