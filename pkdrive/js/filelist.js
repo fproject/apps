@@ -220,9 +220,9 @@
 
 			this.files = [];
 			this._selectedFiles = {};
-			/*this._selectionSummary = new OCA.Files.FileSummary();
+			this._selectionSummary = new OCA.Files.FileSummary();
 
-			this.fileSummary = this._createSummary();*/
+			this.fileSummary = this._createSummary();
 
 			this.setSort('name', 'asc');
 
