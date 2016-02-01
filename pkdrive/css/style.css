@@ -61,3 +61,29 @@ table.multiselect thead {
 	position: relative !important;
 	top: inherit !important;
 }
+@media only screen and (max-width: 800px) {
+	table td.filename .nametext {
+		left: 5px !important;
+	}
+
+	.has-favorites #fileList td.filename a.name {
+		margin-right: 20px !important;
+	}
+	span.targetText {
+		max-width: 30%;
+	}
+	table td.filename .nametext {
+		max-width: 65%;
+	}
+	.modified {
+		width: 90px !important;
+	}
+	th#headerDate, td.date {
+		padding-right: 2px !important;
+		min-width: 90px !important;
+		max-width: 90px !important;
+	}
+	#fileList .popovermenu {
+		right: -30px;
+	}
+}
