@@ -1448,8 +1448,11 @@
 				crossDomain: true,
 				dataType: 'json',
 				success: function(data) {
-					if(data.hasOwnProperty('name'))
+					if(data.hasOwnProperty('name')) {
 						targetDiv.text(data.name);
+						targetDiv.attr('title', data.name + ", " + data.percentComplete + "%");
+						targetDiv.tooltip({placement: 'top'});
+					}
 				}
 			});
 		},
