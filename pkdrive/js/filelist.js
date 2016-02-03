@@ -1450,7 +1450,7 @@
 				success: function(data) {
 					if(data.hasOwnProperty('name')) {
 						targetDiv.text(data.name);
-						targetDiv.attr('title', data.name + ", " + data.percentComplete + "%");
+						targetDiv.attr('title', data.name);
 						targetDiv.tooltip({placement: 'top'});
 					}
 				}
