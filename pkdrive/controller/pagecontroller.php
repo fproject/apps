@@ -98,7 +98,11 @@ class PageController extends Controller {
 		$csp->addAllowedConnectDomain('*');
 
 		/** @var TemplateResponse $response */
-		$response = new TemplateResponse('pkdrive', 'main', $params);  // templates/main.php
+		if(isset($_SESSION['targetType']) && $_SESSION['targetType'] == TargetType::PROJECT)
+			$response = new TemplateResponse('pkdrive', 'container', $params);
+		else
+			$response = new TemplateResponse('pkdrive', 'target', $params);
+
 		$response->setContentSecurityPolicy($csp);
 
 		return $response;
