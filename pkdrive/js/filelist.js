@@ -1183,6 +1183,9 @@
 			if (type === 'dir') {
 				mime = mime || 'httpd/unix-directory';
 			}
+
+			this._allowSelection = (!(fileData.hasOwnProperty('container') && fileData.container == 0));
+
 			var tr = this._createRow(
 				fileData,
 				options
